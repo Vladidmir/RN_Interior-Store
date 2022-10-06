@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import {Pressable, Text, View, Image} from 'react-native';
+
 import {s} from './styles';
 
 interface IAuthHeader {
   title: string;
   onBackPress?: () => void;
 }
-
 const AuthHeader: FC<IAuthHeader> = ({title, onBackPress}) => {
   return (
     <View style={s.container}>
