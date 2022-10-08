@@ -57,7 +57,7 @@ const Tabs = () => (
 );
 
 const App = () => {
-  const isSignedIn = false;
+  const isSignedIn = true;
 
   const theme: Theme = {
     ...DefaultTheme,
