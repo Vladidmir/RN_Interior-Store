@@ -1,10 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {
-  FlatList,
-  NativeSyntheticEvent,
-  TextInputChangeEventData,
-  View,
-} from 'react-native';
+import React, {useState, useEffect, FC} from 'react';
+import {FlatList, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {categories} from '../../../data/categories';
@@ -18,9 +13,14 @@ import ProductHomeItem from '../../../components/ProductHomeItem';
 import {
   FlatPropProduct,
   FlatPropCategory,
+  Product,
 } from '../../../components/types/data';
+import {RootTabParamList} from '../../../../App';
+import {NativeStackScreenProps} from '@react-navigation/native-stack/lib/typescript/src/types';
 
-const HomeScreen = () => {
+interface IHomeSceen extends NativeStackScreenProps<RootTabParamList, 'Home'> {}
+
+const HomeScreen: FC<IHomeSceen> = ({navigation}) => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>();
   const [keyword, setKeyword] = useState<string>();
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -61,7 +61,11 @@ const HomeScreen = () => {
   };
 
   const renderProductItem = ({item}: FlatPropProduct) => {
-    return <ProductHomeItem {...item} />;
+    const onProductPress = (product: Product) => {
+      navigation.navigate('ProductDetails', {product});
+    };
+
+    return <ProductHomeItem onPress={() => onProductPress(item)} {...item} />;
   };
 
   const onChangeKeyword = (text: string | '') => {

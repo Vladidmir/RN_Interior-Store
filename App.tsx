@@ -1,26 +1,38 @@
 import React from 'react';
 import {Image} from 'react-native';
+import {Theme, DefaultTheme} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+
 import Signin from './src/screens/auth/Signin';
 import Splash from './src/screens/auth/Splash';
 import Signup from './src/screens/auth/Signup';
 import HomeScreen from './src/screens/app/HomeScreen';
 import FavoritesScreen from './src/screens/app/FavoritesScreen';
 import ProfileScreen from './src/screens/app/ProfileScreen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import ProductDetailsScreen from './src/screens/app/ProductDetailsScreen';
+
 import {colors} from './src/utils/colors';
-import {Theme, DefaultTheme} from '@react-navigation/native';
+import {Product} from './src/components/types/data';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<RootTabParamList>();
 
 export type RootStackParamList = {
-  Tabs: undefined;
+  ProductDetails: {product?: Product};
+  Tabs: RootTabParamList;
   Splash: undefined;
   Signin: undefined;
   Signup: undefined;
+};
+
+export type RootTabParamList = {
+  Profile: undefined;
+  Favorites: undefined;
+  Home: undefined;
+  ProductDetails: {product?: Product};
 };
 
 const Tabs = () => (
@@ -76,6 +88,11 @@ const App = () => {
               <Stack.Screen
                 name="Tabs"
                 component={Tabs}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name="ProductDetails"
+                component={ProductDetailsScreen}
                 options={{headerShown: false}}
               />
             </>
