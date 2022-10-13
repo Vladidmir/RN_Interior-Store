@@ -5,7 +5,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack/lib/typescr
 
 import Button from '../../../components/Button';
 import ImageCarousel from '../../../components/ImageCarousel';
-import {RootStackParamList, RootTabParamList} from '../../../../App';
+import {RootStackParamList} from '../../../../App';
 import {s} from './styles';
 
 interface IProductDetail

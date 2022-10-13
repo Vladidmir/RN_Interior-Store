@@ -18,6 +18,7 @@ export type ProductItemProps = {
   title: string;
   price: string;
   image: string;
+  icon?: string;
   onPress?: () => void;
 };
 
@@ -30,3 +31,11 @@ export type FlatPropProduct = {
   item: Product;
   index: number;
 };
+
+export type ACategory =
+  | 'Popular'
+  | 'Chair'
+  | 'Table'
+  | 'Armchair'
+  | 'Sofa'
+  | 'Bed';

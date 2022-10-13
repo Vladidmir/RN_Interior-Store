@@ -13,6 +13,9 @@ import HomeScreen from './src/screens/app/HomeScreen';
 import FavoritesScreen from './src/screens/app/FavoritesScreen';
 import ProfileScreen from './src/screens/app/ProfileScreen';
 import ProductDetailsScreen from './src/screens/app/ProductDetailsScreen';
+import SettingsScreen from './src/screens/app/SettingsScreen';
+import CreateListingScreen from './src/screens/app/CreateListingScreen';
+import MyListingsScreen from './src/screens/app/MyListingsScreen';
 
 import {colors} from './src/utils/colors';
 import {Product} from './src/components/types/data';
@@ -26,13 +29,36 @@ export type RootStackParamList = {
   Splash: undefined;
   Signin: undefined;
   Signup: undefined;
+  //.........
+  Profile: undefined;
+  Settings: undefined;
+  CreateListing: undefined;
+  MyListings: undefined;
+};
+
+export type ProfileStackParamList = {
+  Profile: undefined;
+  Settings: undefined;
+  CreateListing: undefined;
+  MyListings: undefined;
 };
 
 export type RootTabParamList = {
-  Profile: undefined;
+  ProfileStack: undefined;
   Favorites: undefined;
   Home: undefined;
   ProductDetails: {product?: Product};
+};
+
+const ProfileStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
+      <Stack.Screen name="CreateListing" component={CreateListingScreen} />
+      <Stack.Screen name="MyListings" component={MyListingsScreen} />
+    </Stack.Navigator>
+  );
 };
 
 const Tabs = () => (
@@ -45,7 +71,7 @@ const Tabs = () => (
           icon = focused
             ? require('./src/assets/tabs/home_active.png')
             : require('./src/assets/tabs/home.png');
-        } else if (route.name === 'Profile') {
+        } else if (route.name === 'ProfileStack') {
           icon = focused
             ? require('./src/assets/tabs/profile_active.png')
             : require('./src/assets/tabs/profile.png');
@@ -64,7 +90,7 @@ const Tabs = () => (
     })}>
     <Tab.Screen name="Home" component={HomeScreen} />
     <Tab.Screen name="Favorites" component={FavoritesScreen} />
-    <Tab.Screen name="Profile" component={ProfileScreen} />
+    <Tab.Screen name="ProfileStack" component={ProfileStack} />
   </Tab.Navigator>
 );
 
