@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image} from 'react-native';
 import {Theme, DefaultTheme} from '@react-navigation/native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import Config from 'react-native-config';
 
 import Signin from './src/screens/auth/Signin';
 import Splash from './src/screens/auth/Splash';
@@ -95,7 +98,15 @@ const Tabs = () => (
 );
 
 const App = () => {
-  const isSignedIn = true;
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: Config.GOOGLE_CLIENT_ID,
+      iosClientId: Config.GOOGLE_IOS_CLIENT_ID,
+      scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+      offlineAccess: false,
+    });
+  }, []);
+  const isSignedIn = false;
 
   const theme: Theme = {
     ...DefaultTheme,

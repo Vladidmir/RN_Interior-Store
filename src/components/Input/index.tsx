@@ -12,7 +12,7 @@ import {
   Modal,
 } from 'react-native';
 import {s} from './styles';
-import {Category} from '../types/data';
+import {ACategory, Category} from '../types/data';
 
 interface IInput extends TextInputProps {
   label?: string;
@@ -23,8 +23,6 @@ interface IInput extends TextInputProps {
   onChangeText: (text: Category | ACategory | string) => void;
   value?: any;
 }
-
-import {ACategory} from '../../screens/app/CreateListingScreen';
 
 const Input: FC<IInput> = ({
   label,
